@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ article }} {% endblock %}
+
+{% block header %} {{ article }} {% endblock %}
+
+{% block container %}
+        <div class="card mt-3 mb-3 text-center bg-dark text-light bg-opacity-50">
+            <div class="card-header">
+                Категории: <a href="{{ article.get_absolute_url }}" class="link-warning">{{ article.category }}</a>
+            </div>
+            <div class="card-body">
+                <div class="media">
+                    {% if article.image %}
+                    <img src="{{ article.image.url }}" alt="Ошибка" width="60%" height="60%" class="mb-3">
+                    {% endif %}
+                    <div class="media-body">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <p class="card-text">{{ article.text}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                {{ article.created_at | date:"d-m-Y H:i:s" }}
+            </div>
+        </div>
+{% endblock %}
+
+{% block pagination %}
+{% endblock %}
