@@ -18,7 +18,10 @@
                 </a>
                 <ul class="dropdown-menu bg-dark bg-opacity-75" aria-labelledby="navbarDropdownMenuLink">
                     {% for item in categories %}
-                        <li><a class="dropdown-item bg-dark bg-opacity-75 text-light" href="{{ item.get_absolute_url }}">{{ item }}</a></li>
+                        <li>
+                            <a class="dropdown-item bg-dark bg-opacity-75 text-light" href="{{ item.get_absolute_url }}">{{ item }}
+                            <span class="badge bg-secondary">{{ item.article_count }}</span></a>
+                        </li>
                     {% endfor %}
                 </ul>
             </li>

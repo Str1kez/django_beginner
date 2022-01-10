@@ -60,6 +60,8 @@ cover/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+*.sqlite
+news/migrations
 
 # Flask stuff:
 instance/
@@ -151,6 +153,3 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 
-# SQLite
-*.sqlite3
-*.sqlite
