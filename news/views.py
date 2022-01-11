@@ -20,6 +20,9 @@ class NewsListView(ListView):
         # можно было использовать extra_context, так как тут он статичен
         return context
 
+    def get_queryset(self):
+        return Article.objects.select_related('category')
+
 
 # Create your views here.
 # def index(request):
@@ -36,7 +39,7 @@ class NewsByCategoryListView(NewsListView):
         return context
 
     def get_queryset(self):
-        return Article.objects.filter(category=self.kwargs.get('category_id'))
+        return Article.objects.filter(category=self.kwargs.get('category_id')).select_related('category')
 
 
 # def get_category(request, category_id):
