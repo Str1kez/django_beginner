@@ -1,4 +1,4 @@
-{% load categories_tags %}
+{#{% load categories_tags %}#}
 {% load static %}
 <!doctype html>
 <html lang="en">
@@ -17,21 +17,22 @@
       <h1 class="display-1 text-light">{% block header %}Base header{% endblock %}</h1>
     </figure>
 
-    {% include 'includes/_dropdown_menu.html' %}
+    {% include 'includes/_navbar.html' %}
 {#    {% get_dropdown_menu %}#}
     <div class="container">
-    {% block container %}
-        Some info
-    {% endblock %}
+        {% block container %}
+            Some info
+        {% endblock %}
 
-    {% block pagination %}
-        pagination if needed
-    {% endblock %}
+        {% if page_obj.has_other_pages %}
+            {% include 'includes/_pagination.html' %}
+        {% endif %}
     </div>
+  </body>
     <footer>
         <p>About this site</p>
     </footer>
 
     <script src="{% static 'bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js' %}"></script>
-  </body>
+
 </html>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import ArticleForm
 from .models import Article, Category
@@ -11,7 +12,7 @@ class NewsListView(ListView):
     template_name = 'news/index.html'
     context_object_name = 'news'
     paginate_by = 3
-    allow_empty = False
+    # allow_empty = False  # Инициализирует доп запрос к бд
     # extra_context = {'title': 'News'}
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -60,9 +61,12 @@ class ArticleDetailView(DetailView):
 #     return render(request, 'news/article.html', {'article': article})
 
 
-class ArticleCreateView(CreateView):
+class ArticleCreateView(LoginRequiredMixin, CreateView):
     form_class = ArticleForm
     template_name = 'news/add_article.html'
+    permission_denied_message = 'Вы не авторизованы!'
+    login_url = '/admin/'
+
     # success_url = reverse_lazy('home')  Если не хотим, чтобы переходило по пути absolute_url
     # reverse_lazy выполняется в ходе работы, обычный не знает, что за путь 'home'
 
