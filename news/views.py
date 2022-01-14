@@ -27,9 +27,9 @@ class NewsListView(ListView):
 
 # Create your views here.
 # def index(request):
-    # articles = Article.objects.order_by('-created_at')  не нужно, так как в мете для админки уже отсортировали
-    # articles = Article.objects.all()
-    # return render(request, 'news/index.html', {'news': articles, 'title': 'Новости'})
+#     articles = Article.objects.order_by('-created_at')  # не нужно, так как в мете для админки уже отсортировали
+#     articles = Article.objects.all()
+#     return render(request, 'news/index.html', {'news': articles, 'title': 'Новости'})
 
 
 # думаю можно унаследовать от предыдущего класса, так как атрибуты одинаковы

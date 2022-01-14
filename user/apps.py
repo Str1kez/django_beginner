@@ -1,8 +1,7 @@
 from django.apps import AppConfig
-import news
 
 
-class NewsConfig(AppConfig):
+class UserConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'news'
-    verbose_name = 'Статьи'
+    name = 'user'
+    verbose_name = 'Пользователи'

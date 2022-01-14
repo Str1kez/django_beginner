@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} Регистрация {% endblock %}
+
+{% block header %} Регистрация {% endblock %}
+
+{% block container %}
+    {{ form.non_field_errors }}
+    <form action="{% url 'sign_up' %}" method="post" class="self-style-form needs-validation">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="sign_up" class="btn btn-warning">Регистрация</button>
+    </form>
+{% endblock %}

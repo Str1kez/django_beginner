@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
-    'news.apps.NewsConfig'
+    'news.apps.NewsConfig',
+    'user.apps.UserConfig'
 ]
 
 MIDDLEWARE = [
@@ -57,7 +58,10 @@ ROOT_URLCONF = 'myapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'news/templates', BASE_DIR / 'templates'],
+        'DIRS': [
+            BASE_DIR / 'news/templates',
+            BASE_DIR / 'templates',
+            BASE_DIR / 'user/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
