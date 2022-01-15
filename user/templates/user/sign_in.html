@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} Вход {% endblock %}
+
+{% block header %} Вход {% endblock %}
+
+{% block container %}
+    {{ form.non_field_errors }}
+    <form action="{% url 'user:sign_in' %}" method="post" class="self-style-form needs-validation">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="sign_in" class="btn btn-warning">Вход</button>
+    </form>
+{% endblock %}

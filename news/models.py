@@ -39,7 +39,7 @@ class Article(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('article', kwargs={'pk': self.id})
+        return reverse('news:article', kwargs={'pk': self.id})
 
     class Meta:
         verbose_name = 'Статья'
@@ -51,7 +51,7 @@ class Category(models.Model):
     title = models.CharField(max_length=150, verbose_name='Название категории', db_index=True)
 
     def get_absolute_url(self):
-        return reverse('category', kwargs={'category_id': self.id})
+        return reverse('news:category', kwargs={'category_id': self.id})
 
     def __str__(self):
         return self.title

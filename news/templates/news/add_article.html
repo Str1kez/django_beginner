@@ -6,7 +6,7 @@
 
 {% block container %}
     {{ form.non_field_errors }}
-    <form action="{% url 'add_article' %}" method="post" class="self-style-form needs-validation">
+    <form action="{% url 'news:add_article' %}" method="post" class="self-style-form needs-validation">
         {% csrf_token %}
         {{ form.as_p }}
 {#        {% for f in form %}#}

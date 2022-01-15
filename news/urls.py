@@ -3,6 +3,8 @@ from django.conf.urls.static import static
 from django.urls import path
 from .views import NewsListView, NewsByCategoryListView, ArticleDetailView, ArticleCreateView
 
+app_name = 'news'
+
 urlpatterns = [
     # path('', index, name='home'),
     path('', NewsListView.as_view(), name='home'),
