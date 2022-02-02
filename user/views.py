@@ -23,7 +23,7 @@ def sign_up(request):
 
 def sign_in(request):
     if request.method == 'POST':
-        form = AuthForm(request, data=request.POST)
+        form = AuthForm(data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
             messages.success(request, f'Вы вошли в аккаунт как {form.get_user().username}')
