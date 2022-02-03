@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os.path
 from pathlib import Path
+from environs import Env
+
+from .ckeditor_config import CKEDITOR_CONFIGS
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +23,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--618#1d613r47(4q#jlrq0c*y)7)t@n4^j#(gl0^xwwl+91g0o'
+ENV = Env()
+ENV.read_env()
+
+SECRET_KEY = ENV.str('SECRET_KEY')
+
+EMAIL_HOST = ENV.str('EMAIL_HOST')
+EMAIL_PORT = ENV.str('EMAIL_PORT')
+EMAIL_HOST_USER = ENV.str('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = ENV.str('EMAIL_HOST_PASSWORD')
+EMAIL_USE_SSL = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
+    'captcha',
     'debug_toolbar',
     'news.apps.NewsConfig',
     'user.apps.UserConfig'
@@ -139,5 +153,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
 
 INTERNAL_IPS = ["127.0.0.1"]

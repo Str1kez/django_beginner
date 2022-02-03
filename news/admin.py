@@ -1,5 +1,7 @@
+from django import forms
 from django.contrib import admin
 from django.utils.safestring import mark_safe
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 from .models import Article, Category
 
@@ -7,7 +9,16 @@ from .models import Article, Category
 # sudo ilya 1111
 
 
+class PostAdminForm(forms.ModelForm):
+    text = forms.CharField(widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = Article
+        fields = '__all__'
+
+
 class ArticleAdmin(admin.ModelAdmin):
+    form = PostAdminForm
     list_display = ('id', 'title', 'category', 'author', 'created_at', 'updated_at', 'is_published', 'get_image')
     list_display_links = ('id', 'title')
     search_fields = ('title', 'author')  # регистр не имеет значения только на англ

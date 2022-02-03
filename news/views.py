@@ -65,7 +65,7 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
     form_class = ArticleForm
     template_name = 'news/add_article.html'
     permission_denied_message = 'Вы не авторизованы!'
-    login_url = '/admin/'
+    login_url = reverse_lazy('user:sign_in')
 
     # success_url = reverse_lazy('home')  Если не хотим, чтобы переходило по пути absolute_url
     # reverse_lazy выполняется в ходе работы, обычный не знает, что за путь 'home'

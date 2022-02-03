@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} Отправить письмо {% endblock %}
+
+{% block header %} Отправить письмо {% endblock %}
+
+{% block container %}
+    {{ form.non_field_errors }}
+    <form action="{% url 'user:send_email' %}" method="post" class="self-style-form needs-validation">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+        <button type="submit" name="send_email" class="btn btn-warning">Отправить</button>
+    </form>
+{% endblock %}

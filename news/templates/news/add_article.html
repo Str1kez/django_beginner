@@ -8,6 +8,7 @@
     {{ form.non_field_errors }}
     <form action="{% url 'news:add_article' %}" method="post" class="self-style-form needs-validation">
         {% csrf_token %}
+        {{ form.media }}
         {{ form.as_p }}
 {#        {% for f in form %}#}
 {#              <div class="mb-3">#}

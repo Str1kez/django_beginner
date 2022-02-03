@@ -1,9 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect
+from django.core.mail import EmailMessage
 
 # Create your views here.
-from user.forms import RegistrationForm, AuthForm
+from user.forms import RegistrationForm, AuthForm, EmailForm
+from myapp.settings import EMAIL_HOST_USER
 
 
 def sign_up(request):
@@ -39,3 +41,24 @@ def user_logout(request):
     logout(request)
     messages.success(request, 'Вы вышли из аккаунта')
     return redirect('news:home')
+
+
+def send_email(request):
+    if request.method == 'POST':
+        form = EmailForm(request.POST)
+        if form.is_valid():
+            message = EmailMessage(subject=form.cleaned_data['subject'],
+                                   body=form.cleaned_data['content'],
+                                   from_email=EMAIL_HOST_USER,
+                                   to=[form.cleaned_data['destination_email']],
+                                   )
+            message.content_subtype = 'html'
+            is_sent = message.send(fail_silently=True)
+            if is_sent:
+                messages.success(request, 'Письмо отправлено')
+            else:
+                messages.error(request, 'Ошибка отправки')
+            return redirect('user:send_email')
+    else:
+        form = EmailForm()
+    return render(request, 'user/send_email.html', {'form': form})
